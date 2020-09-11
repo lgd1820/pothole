@@ -10,7 +10,7 @@ import numpy as np
 
 window = 200
 step = 20
-path = "/home/dblab/pothole/data/npy/"
+path = "./data/npy/"
 
 x = np.load(path + str(window) + "_" + str(step) + ".npz")
 x_p = x["p"]
