@@ -78,5 +78,5 @@ model.summary()
 print(hist.history["accuracy"][-1], acc[1])
 #print(len(x_p[:d_p*3]), len(x_n[:d_n*3]), len(x_p[d_n*3:]), len(x_n[d_n*3:]))
 # model save
-#model.save("/home/dblab/pothole/data/model2/" + str(window) + "_" + str(step) + ".h5")
+#model.save("./model/" + str(window) + "_" + str(step) + ".h5")
 #model.save("/home/dblab/pothole/data/model3/" + str(window) + "_" + str(step) + ".h5")
