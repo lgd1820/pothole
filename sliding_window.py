@@ -22,11 +22,19 @@ ksc02.sort()
 window_size_list = [50, 100, 150, 200]
 step_list = [5, 10, 15, 20]
 
+'''
+    함수 개요 :
+        데이터를 window, step 크기만큼 슬라이스 하는 함수
+    매개변수 :
+        window_size = window 크기
+		step = step 크기
+'''
 def sliding_step(window_size, step):
 	p_sliding = []
 	n_sliding = []
-	path_p = "./data/npy/pothole_sliding_" + str(window_size) + "_" + str(step)
-	path_n = "./data/npynormal_sliding_" + str(window_size) + "_" + str(step)
+	path = "./data/npy/pothole_sliding_" + str(window_size) + "_" + str(step)
+
+	# 파일은 time,x,y,z,latitue,longitude 가 라인 하나로 이루어짐
 	for filename in filenames:
 		p = []
 		line_num = 0
@@ -63,12 +71,12 @@ def sliding_step(window_size, step):
 						flag = 0
 						end_line_num = 400 // step
 					sq = sq[1:]
+	
 	npy_p = np.array(p_sliding)
 	npy_n = np.array(n_sliding)
 	print(npy_p.shape, npy_n.shape, window_size, step)
-
-	np.save(path_p, npy_p)
-	np.save(path_n, npy_n)
+ 
+	np.savez(path, p=npy_p, n=npy_n)
 
 for ws in window_size_list:
 	for s in step_list:

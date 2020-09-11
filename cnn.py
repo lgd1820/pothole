@@ -1,36 +1,30 @@
+'''
+작성일 : 2020-09-11
+작성자 : 이권동
+코드 개요 : window, step 에 따른 학습 후 모델을 저장하는 코드
+'''
 from keras.utils import *
 import tensorflow as tf
 import numpy as np
-from tensorflow.python.client import device_lib
-#device_lib.list_local_devices()
 
-# normalize
-#i_max, i_min = x.max(), x.min()
-#x = (x - i_min) / (i_max - i_min)
-	
-#shuffle_indices2 = np.random.permutation(np.arange(len(y_v)))
-#X_valid = x_v[shuffle_indices2]
-#Y_valid = y_v[shuffle_indices2]
 
 window = 200
 step = 20
-path = "/home/dblab/pothole/data/final_data_sliding/"
+path = "/home/dblab/pothole/data/npy/"
 
 x = np.load(path + str(window) + "_" + str(step) + ".npz")
 x_p = x["p"]
 x_n = x["n"]
 
-#i_max, i_min = x_n.max(), x_n.min()
-#x_p = (x_p - i_min) / (i_max - i_min)
-#x_n = (x_n - i_min) / (i_max - i_min)
-
+# 데이터 셔플 후 3 : 1 비율로 학습 데이터와 테스트 데이터를 나눔
+# pothole 데이터가 압도적으로 적기 때문에 pothole 데이터 길이 기준으로
+# 3 : 1 비율로 스플릿
 shuffle = np.random.permutation(np.arange(len(x_n)))
 shuffle2 = np.random.permutation(np.arange(len(x_p)))
 x_p = x_p[shuffle2]
 x_n = x_n[shuffle]
 x_n = x_n[:len(x_p)]
 
-#x_n = x["n"][:len(x_p)*10]
 d_p = len(x_p) // 4
 d_n = len(x_n) // 4
 
@@ -49,6 +43,8 @@ X_valid = X_valid.reshape(-1, 1, window, 1)
 Y_train = np_utils.to_categorical(Y_train, 2)
 Y_valid = np_utils.to_categorical(Y_valid, 2)
 
+
+# 모델 설정
 model = tf.keras.Sequential()
 model.add(tf.keras.layers.Conv2D(32, kernel_size=(1, 3), padding='same', activation='relu', input_shape=(1, window, 1) ))
 model.add(tf.keras.layers.Conv2D(32, kernel_size=(1, 3), padding='same', activation='relu'))
