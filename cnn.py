@@ -76,7 +76,7 @@ acc = model.evaluate(X_valid, Y_valid, batch_size = 128)
 #print(hist)
 model.summary()
 print(hist.history["accuracy"][-1], acc[1])
-#print(len(x_p[:d_p*3]), len(x_n[:d_n*3]), len(x_p[d_n*3:]), len(x_n[d_n*3:]))
+print(len(x_p[:d_p*3]), len(x_n[:d_n*3]), len(x_p[d_n*3:]), len(x_n[d_n*3:]))
 # model save
-#model.save("/home/dblab/pothole/data/model2/" + str(window) + "_" + str(step) + ".h5")
-#model.save("/home/dblab/pothole/data/model3/" + str(window) + "_" + str(step) + ".h5")
+model.save("./model/" + str(window) + "_" + str(step) + ".h5")
+
