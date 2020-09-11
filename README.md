@@ -15,4 +15,7 @@
 
 실험결과
 -------------
+가로축은 SVM 을 시작해 각 window 크기를 나타내는 W, step 크기를 나타내는 S 가 있다.
+비교 부분은 Accuracy, FalseNagative, TruePositive, F1 score 로 나온다.
+
 ![image](https://user-images.githubusercontent.com/65576979/92886093-5641ca00-f44e-11ea-8706-c96ad3332164.png)
